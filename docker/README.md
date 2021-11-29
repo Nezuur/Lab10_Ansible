@@ -1,12 +1,14 @@
-Role Name
+Docker install
 =========
 
-A brief description of the role goes here.
+Install docker on CentOS 8 and Ubuntu 20.04 as a role
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+vm1 is a Ansible host
+vm2 Ubuntu 20.04
+vm3 CentOS 8
 
 Role Variables
 --------------
@@ -23,9 +25,11 @@ Example Playbook
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+        ---
+        - hosts: app
+         become: true
+          roles:
+            - docker
 
 License
 -------
