@@ -1,0 +1,35 @@
+---
+  - name: Install pre req packages
+    yum:
+      state: present
+      name:
+        - yum-utils
+        - lvm2
+
+  - name: Add Docker repo
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docer-ce.repo
+    become: yes
+
+  - name: Install Docker
+    package:
+      name: docker-ce
+      state: latest
+    become: yes
+
+  - name: Add user alex to docker group
+    user:
+      name: alex
+      groups: docker
+      append: yes
+    become: yes
+    notify:
+      - restart docker
+
+  - name: Start Docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+    become: yes
